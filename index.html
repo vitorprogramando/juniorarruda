@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+			<head> 
+				<meta charset=utf-8>
+				<meta http-equiv="X-UA-compatible" content= "IE-edge">
+				<meta name= "viewport" content="widht=device-width, initial-scale=1.0">
+				<link rel="stylesheet" href="style.css">
+				<link rel="icon" href="img/ICONE.png">
+				<title>RECIBO</title>
+				<style>
+					*{
+						padding: 0;
+						margin: 0;
+					
+						
+
+					.dados {
+						padding: 20px;
+						background-color: black;
+						width: 100%;
+						height: 100%;
+			
+					}
+
+					.dados p {
+						color: white;
+						
+					}
+
+
+					.print {
+						display: none;
+						margin: 10px;
+						padding: 20px;
+						border: 1px solid black;
+						border-radius: 30px;
+						width: 900px;
+					}
+
+					.print h1 {
+						border-bottom: 1px solid black;
+						margin-bottom: 20px;
+					
+					}
+
+					.print h3 {
+    					border-bottom: 1px solid black;
+    					margin-bottom: 20px;
+
+					}
+
+
+					.print h5{
+						padding: 10px;
+						border: 1px solid black;
+						border-radius: 20px;
+						display: inline-block;
+						margin-left: 10px;
+					}
+
+					.print h4 {
+    					text-align: right;
+   						margin-bottom: 20px;
+					}
+					.print center {
+   						border: solid 2px black;
+    					border-radius: 12px;
+    					height: 16px;
+					}
+
+					.assinatura{
+						border-top: 1px solid black;
+						text-align: center;
+
+					}
+
+					@media print {
+						.print {
+							display: block;
+						}
+
+						.dados {
+							display: none;
+						}
+
+					}
+
+					.dados button {
+        				color: goldenrod;
+    					position: relative;
+        				margin: 15px;
+        				padding: 8px 15px;
+        				letter-spacing: 1px;
+        				text-decoration: none;
+        				color: goldenrod;
+        				font-weight: 700;
+        				background: transparent;
+        				cursor: pointer;
+        				transition: ease-out 0.8;
+        				border: 1px solid #ffffff;
+        				border-radius: 15px;
+        				box-shadow: inset 0 0 0 0 #ffffff;
+
+    				}
+
+    					button:hover {
+        					color: black;
+        					box-shadow: inset 0 -100px 0 0 goldenrod;
+
+    				}
+
+    					button:active {
+        					transform: scale(0.9);
+    				}
+
+    					ul li{
+        					margin: 0 9px;
+        
+   	 						}
+
+    					ul{
+       					display:flex;
+        				flex-wrap: wrap;
+        				list-style: none;
+    				}
+				</style>
+				
+			</head>
+			<body>
+				
+				<div class="dados">
+				<center>
+					<img src="img/LOGO.png" width="250px" height="250px ">
+				</center>
+					<br>
+					<p>Salão:</p>
+					<select name="NS" id="option">
+						<option value="Espaço Junior Arruda" selected>Espaço Junior Arruda</option>
+					</select>
+					<br>
+					<br>
+					<br>
+					<p>Recebemos de:</p> 
+					<input type="text" id="nome" placeholder="Nome do Cliente" /> <br /><br />
+					<br>
+					<p>Valor R$:</p>
+					<input type="number" step="0.01" id="valor" placeholder="Digite o valor" /> <br /><br />
+					<br>
+					<p>Referente a:</p> 
+					<input type="text" id="referente" placeholder="Digite aqui" /> <br /><br />
+					<br>
+					<p>Forma de pagamento:</p> 
+					<select name="NS" id="NS">
+						<option value="Pix" selected>Pix</option>
+						<option value="Dinheiro" selected>Dinheiro</option>
+						<option value="Cartão de Débito" selected>Cartão de Débito</option>
+						<option value="Cartão de Crédito" selected>Cartão de Crédito</option>
+						<option value="Selecione a forma de pagamento" selected>Selecionar forma de pagamento</option>
+					</select>
+					<select name="vezes" id="vezes">
+						<option value="1x no Cartão de Crédito" selected>1x no Cartão de Crédito</option>
+						<option value="2x no Cartão de Crédito" selected>2x no Cartão de Crédito</option>
+						<option value="3x no Cartão de Crédito" selected>3x no Cartão de Crédito</option>
+						<option value="4x no Cartão de Crédito" selected>4x no Cartão de Crédito</option>
+						<option value="5x no Cartão de Crédito" selected>5x no Cartão de Crédito</option>
+						<option value="" selected>Parcelas</option>
+					</select>
+					
+					<br>
+					<br>
+					<br>
+					<p>Data:</p> 
+					<input type="date" id="data" /> <br /><br />
+					<br>
+					<br>
+					<br>
+					<button onclick="gerarRecibo()">Gerar recibo</button>
+				</div>
+			
+				<div class="print">
+					<img src="img/LOGOPDF.png" height="320px" width="100%">
+					<br>
+						<h1>Salão - <span id="recibo_option"></span></h1>
+						<h4>CNPJ: 27.881.262.0001-69</h4>
+					<center>RECIBO</center>
+					<br>
+					<br>
+					<h3>Recebemos de: <span id="recibo_nome"></span></p></h3>
+					<br>
+					<br>
+					<h3>Forma de pagamento: <span id="recibo_NS"></span>  /  <span id="recibo_vezes"></span></h3>
+					<br>
+					<br>
+					<h3>Referente a: <span id="recibo_referente"></span></h3>
+					<br>
+					<br>
+					<h3>Data: <span id="recibo_data"></span></h3>
+					<h4>Rua Setúbal, Boa Viagem, Recife-PE</h4>
+
+						<strong>Valor R$:</strong> <h5  id="recibo_valor"> 0,00</h5>
+		
+						<br>
+						<br>
+						<img src="img/informação.png" height="100px" width="50%">
+					<br>
+					<br>
+					<br>
+					<div class="assinatura">Assinatura</div>
+					<br>
+					 <img src="img/rodapé.png" height="200px" width="100%">
+					<br>
+					<br>
+				</div>
+
+				<script>
+					
+					function gerarRecibo() {
+						document.getElementById('recibo_option').innerHTML = document.getElementById('option').value;
+						document.getElementById('recibo_nome').innerHTML = document.getElementById('nome').value;
+						document.getElementById('recibo_referente').innerHTML = document.getElementById('referente').value;
+						document.getElementById('recibo_NS').innerHTML = document.getElementById('NS').value;
+						document.getElementById('recibo_vezes').innerHTML = document.getElementById('vezes').value;
+						document.getElementById('recibo_valor').innerHTML = parseFloat(document.getElementById('valor').value).toLocaleString('pt-br' , {minimumFractionDigits: 2});
+						document.getElementById('recibo_data').innerHTML = document.getElementById('data').value;
+						window.print(); 
+					}
+				</script>
+				
+			</body>
+			</html>
+				
